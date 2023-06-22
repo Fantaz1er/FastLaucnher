@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons8-ps-controller-50.png</file>
+    <file>remove_white_24dp.svg</file>
+    <file>close_white_24dp.svg</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>GTA-5-PNG-Image.png</file>
+    <file>FastLauncherLogo.png</file>
+  </qresource>
+  <qresource prefix="icons_buttons">
+    <file>icons8-стрелка-влево-в-круге-50.png</file>
+    <file>icons8-настройки.svg</file>
+    <file>icons8-news.svg</file>
+    <file>icons8-выключение-системы-50 (1).png</file>
+    <file>icons8-discord.svg</file>
+  </qresource>
+</RCC>
