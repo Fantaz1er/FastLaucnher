@@ -1,23 +1,29 @@
 # -*- coding: utf-8 -*-
-import ui.res_rc  # type: ignore
-from PyQt5 import QtCore, QtGui, QtWidgets
-from ui.dialog import Dialog
-from bin import win
-from ui.handlers.WindowMovement import PressEvent
 from webbrowser import open
 
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-class UiFastLauncher(QtWidgets.QWidget, PressEvent):
+import ui.res_rc  # type: ignore
+from bin import launcher
+from bin import win
+from ui.dialog import Dialog
+from ui.handlers import WindowMovement, AnimationClicked, PushButton
+
+
+class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
+    TIME = 5
+
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent=parent)
 
         self.setFixedSize(950, 650)
+        self.setWindowIcon(QtGui.QIcon(":/favicon/landing-page.ico"))
 
         self.setWindowFlag(QtCore.Qt.WindowType.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.setStyleSheet("QScrollBar:vertical {\n"
-                           "    margin: 9px 0 15px 0;\n"
+                           "    margin: 10px 0 15px 0;\n"
                            "    width: 4px;\n"
                            " }\n"
                            "\n"
@@ -82,8 +88,8 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
 
         self.settings = QtCore.QSettings("Settings", "Using keys")
 
-        if self.settings.contains('Window/Place'):
-            self.setGeometry(self.settings.value('Window/Place'))
+        if self.settings.contains("Data2/Place"):
+            self.setGeometry(self.settings.value("Data2/Place"))
 
         self.main = QtWidgets.QWidget(self)
         self.main.setStyleSheet("background-color: #181a1d;")
@@ -107,7 +113,6 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.logo = QtWidgets.QLabel(self.header)
         self.logo.setStyleSheet("background-color: none;\n"
                                 "border:none;")
-        self.logo.setText("")
         self.logo.setPixmap(QtGui.QPixmap(":/images/FastLauncherLogo.png"))
         self.horizontalLayout_3.addWidget(self.logo)
         self.tools = QtWidgets.QWidget(self.header)
@@ -187,9 +192,9 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
                                 "border-radius: 6px;\n"
                                 "")
         self.body.setObjectName("body")
-        self.btn_play = QtWidgets.QPushButton(self.body)
+        self.btn_play = PushButton.PushButton(self.body)
         self.btn_play.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_play.setEnabled(True)
+        self.btn_play.setEnabled(False)
         self.btn_play.setGeometry(QtCore.QRect(280, 450, 75, 23))
         self.btn_play.setStyleSheet("QPushButton {\n"
                                     "background-color: #26272a;\n"
@@ -204,6 +209,13 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
                                     "color: white;\n"
                                     "}")
         self.btn_play.setObjectName("btn_play")
+        self.btn_play.setCheckable(True)
+
+        self.aniButton = AnimationClicked.AnimationShadowEffect(QtGui.QColor(223, 0, 91), self.btn_play)
+
+        self.btn_play.hover.connect(self.button_hover)
+        self.btn_play.setGraphicsEffect(self.aniButton)
+
         self.lbl_count = QtWidgets.QLabel(self.body)
         self.lbl_count.setGeometry(QtCore.QRect(-70, 279, 191, 70))
         self.lbl_count.setStyleSheet("background-color: #cc0053;\n"
@@ -224,9 +236,8 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.img_game = QtWidgets.QLabel(self.body)
         self.img_game.setGeometry(QtCore.QRect(10, -31, 631, 511))
         self.img_game.setStyleSheet("background-color: none;")
-        self.img_game.setText("")
-        self.img_game.setPixmap(QtGui.QPixmap(":/images/GTA-5-PNG-Image.png"))
         self.img_game.setObjectName("img_game")
+        self.img_game.setPixmap(QtGui.QPixmap(":/images/GTA-5-PNG-Image.png"))
         self.widget = QtWidgets.QWidget(self.body)
         self.widget.setVisible(False)
         self.widget.setGeometry(QtCore.QRect(0, 0, 651, 491))
@@ -285,8 +296,7 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.verticalLayout_4.addLayout(self.horizontalLayout_6)
         self.line = QtWidgets.QFrame(self.layoutWidget)
         self.line.setMaximumSize(QtCore.QSize(600, 16777215))
-        self.line.setStyleSheet("background-color: #2e2f31;\n"
-                                "")
+        self.line.setStyleSheet("background-color: #2e2f31;\n")
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
@@ -310,12 +320,40 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.verticalLayout_4.addLayout(self.horizontalLayout_5)
         self.line_2 = QtWidgets.QFrame(self.layoutWidget)
         self.line_2.setMaximumSize(QtCore.QSize(600, 16777215))
-        self.line_2.setStyleSheet("background-color: #2e2f31;\n"
-                                  "")
+        self.line_2.setStyleSheet("background-color: #2e2f31;\n")
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         self.verticalLayout_4.addWidget(self.line_2)
+        self.label_3 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_3.setObjectName("label_3")
+        self.line_edit = QtWidgets.QLineEdit()
+        self.line_edit.setMaxLength(2)
+        self.line_edit.setFixedSize(103, 40)
+        font = QtGui.QFont()
+        font.setFamily("Rubik")
+        font.setPointSize(14)
+        font.setBold(True)
+        self.line_edit.setFont(font)
+        self.line_edit.setStyleSheet("QLineEdit {border: none; color: white;}")
+
+        if self.settings.contains("Time/Shutdown"):
+            self.TIME = abs(int(self.settings.value("Time/Shutdown")))
+            self.line_edit.setText(self.settings.value("Time/Shutdown"))
+        else:
+            self.line_edit.setText(str(self.TIME))
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.horizontalLayout_7.addWidget(self.label_3)
+        self.horizontalLayout_7.addWidget(self.line_edit)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_7)
+        self.line_3 = QtWidgets.QFrame(self.layoutWidget)
+        self.line_3.setMaximumSize(QtCore.QSize(600, 16777215))
+        self.line_3.setStyleSheet("background-color: #2e2f31;")
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.verticalLayout_4.addWidget(self.line_3)
         self.img_game.raise_()
         self.lbl_count.raise_()
         self.img_play.raise_()
@@ -362,38 +400,36 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.btn_hide.setIconSize(QtCore.QSize(24, 24))
         self.btn_hide.setObjectName("btn_hide")
         self.game_list = QtWidgets.QListWidget(self.choice)
-        self.game_list.setGeometry(QtCore.QRect(-12, 98, 260, 541))
+        self.game_list.setGeometry(QtCore.QRect(-3, 98, 251, 541))
+        self.game_list.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.game_list.setFocusPolicy(QtCore.Qt.NoFocus)
         self.game_list.verticalScrollBar().setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
         self.game_list.setSpacing(9)
         self.game_list.setStyleSheet("QListWidget{\n"
                                      "border: none;\n"
                                      "}\n"
-                                     "\n"
                                      "QListWidget::item{\n"
                                      "background-color: #16171a;\n"
                                      "color: white;\n"
                                      "height: 75px;\n"
                                      "}\n"
-                                     "\n"
                                      "QListWidget::item:hover{\n"
                                      "background-color: #1f2124;\n"
+                                     "}\n"
+                                     "QListWidget::item:selected{\n"
+                                     "border: 2px solid rgb(255,255,255);\n"
                                      "}")
         self.game_list.setObjectName("game_list")
-        for _ in range(12):
-            item = QtWidgets.QListWidgetItem()
-            font = QtGui.QFont()
-            font.setFamily("Rubik")
-            font.setPointSize(12)
-            font.setBold(True)
-            font.setWeight(75)
-            item.setFont(font)
-            brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-            brush.setStyle(QtCore.Qt.NoBrush)
-            item.setBackground(brush)
-            self.game_list.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font = QtGui.QFont()
+        font.setFamily("Rubik")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.game_list.addItem(item)
         self.lbl_list = QtWidgets.QLabel(self.choice)
-        self.lbl_list.setGeometry(QtCore.QRect(-7, 32, 170, 41))
+        self.lbl_list.setGeometry(QtCore.QRect(-7, 32, 191, 41))
         self.lbl_list.setStyleSheet("color: white;\n"
                                     "font-family: Rubik;\n"
                                     "font-size: 16pt;\n"
@@ -416,24 +452,27 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.verticalLayout_3.addWidget(self.lbl_version)
         self.verticalLayout.addWidget(self.main)
 
-        dialog_window = Dialog()
-
         self.retranslateUi()
 
-        self.btn_close.clicked.connect(QtWidgets.qApp.exit)  # type: ignore
-        self.btn_hide.clicked.connect(lambda: self.setWindowState(self.windowState() | QtCore.Qt.WindowMinimized))  # type: ignore
+        dialog_window = Dialog(self.TIME)
+
+        self.btn_close.clicked.connect(self.close)  # type: ignore
+        self.btn_hide.clicked.connect(
+            lambda: self.setWindowState(self.windowState() | QtCore.Qt.WindowMinimized))  # type: ignore
         self.btn_settings.clicked.connect(self.open_settings_menu)  # type: ignore
         self.pushButton.clicked.connect(self.open_settings_menu)  # type: ignore
         self.btn_shutdown.clicked.connect(lambda: dialog_window.show())  # type: ignore
         self.btn_news.clicked.connect(lambda: open("https://vk.com/alexanderkochetov"))  # type: ignore
         self.btn_discord.clicked.connect(lambda: open("https://discord.gg/ezVDWXmgx"))  # type: ignore
-        self.btn_play.clicked.connect(self.open_bind)  # type: ignore
+        self.game_list.clicked.connect(self.choiceBind)  # type: ignore
+        self.btn_play.clicked.connect(lambda: self.open_bind(self.game_list.currentRow()))  # type: ignore
+        self.line_edit.textChanged.connect(self.changeValueTime)  # type: ignore
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("self", "Form"))
+        self.setWindowTitle(_translate("self", "FastLauncher"))
         self.btn_news.setText(_translate("self", "Новости"))
         self.btn_news.setShortcut(_translate("self", "Ctrl+N"))
         self.btn_settings.setText(_translate("self", "Настройки"))
@@ -442,54 +481,33 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
         self.btn_discord.setShortcut(_translate("self", "Ctrl+D"))
         self.btn_shutdown.setText(_translate("self", "Shutdown"))
         self.btn_shutdown.setShortcut(_translate("self", "Ctrl+Q"))
-        self.btn_play.setText(_translate("self", "Играть"))
+        self.btn_play.setText(_translate("self", "LAUNCH"))
         self.lbl_count.setText(_translate("self", f"{self.game_list.count()}"))
         self.pushButton.setText(_translate("self", "На главную страницу"))
         self.label.setText(_translate("self", "Сворачивать лаунчер после запуска бинда"))
         self.label_2.setText(_translate("self", "Запускать лаунчер после запуска компьютера"))
+        self.label_3.setText(_translate("self", "Время до выключения компьютера"))
         __sortingEnabled = self.game_list.isSortingEnabled()
         self.game_list.setSortingEnabled(False)
         item = self.game_list.item(0)
-        item.setText(_translate("self", "1"))
-        item = self.game_list.item(1)
-        item.setText(_translate("self", "2"))
-        item = self.game_list.item(2)
-        item.setText(_translate("self", "3"))
-        item = self.game_list.item(3)
-        item.setText(_translate("self", "1"))
-        item = self.game_list.item(4)
-        item.setText(_translate("self", "2"))
-        item = self.game_list.item(5)
-        item.setText(_translate("self", "3"))
-        item = self.game_list.item(6)
-        item.setText(_translate("self", "1"))
-        item = self.game_list.item(7)
-        item.setText(_translate("self", "2"))
-        item = self.game_list.item(8)
-        item.setText(_translate("self", "3"))
-        item = self.game_list.item(9)
-        item.setText(_translate("self", "1"))
-        item = self.game_list.item(10)
-        item.setText(_translate("self", "2"))
-        item = self.game_list.item(11)
-        item.setText(_translate("self", "3"))
+        item.setText(_translate("self", "\tWar Thunder"))
         self.game_list.setSortingEnabled(__sortingEnabled)
-        self.lbl_list.setText(_translate("self", "Список игр"))
-        self.lbl_version.setText(_translate("self", "v0.0.1"))
+        self.lbl_list.setText(_translate("self", "Список биндов"))
+        self.lbl_version.setText(_translate("self", "v0.0.2"))
 
-    def saveBoxState_load(self):
+    def saveBoxState_load(self) -> None:
         self.settings.beginGroup("Data")
         self.settings.setValue("State", self.checkBox_2.checkState())
         self.settings.endGroup()
         win.autoLaunch(bool(self.checkBox_2.checkState()))
 
-    def saveBoxState_hide(self):
+    def saveBoxState_hide(self) -> None:
         self.settings.beginGroup("Data2")
         self.settings.setValue("State", self.checkBox.checkState())
         self.settings.endGroup()
         self.hideLauncherOnPlay = bool(self.checkBox.checkState())
 
-    def open_settings_menu(self):
+    def open_settings_menu(self) -> None:
         if not self.widget.isVisible():
             self.widget.setVisible(True)
             self.btn_settings.setStyleSheet("QPushButton{\n"
@@ -511,11 +529,35 @@ class UiFastLauncher(QtWidgets.QWidget, PressEvent):
                                             "}\n")
             self.widget.setVisible(False)
 
-    def open_bind(self):
+    def choiceBind(self) -> None:
+        self.btn_play.setEnabled(True)
+        self.img_game.setPixmap(QtGui.QPixmap(":/images/logo-warthunder-new.svg"))
+        self.img_game.setGeometry(QtCore.QRect(80, -30, 571, 431))
+
+    def open_bind(self, open_id: int) -> None:
         if self.hideLauncherOnPlay:
             self.setWindowState(self.windowState() | QtCore.Qt.WindowMinimized)
+        launcher.openBind(self.game_list.item(open_id).text().strip())
+
+    def button_state_func(self, state) -> None:
+        if state:
+            self.aniButton.stop()
+        else:
+            self.aniButton.start()
+
+    def button_hover(self, hover) -> None:
+        if hover == "enterEvent":
+            self.aniButton.start()
+        elif hover == "leaveEvent":
+            self.aniButton.stop()
+
+    def changeValueTime(self, x: str) -> None:
+        self.TIME = abs(int(x)) if x else 0
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
-        self.settings.beginGroup('Window')
-        self.settings.setValue('Place', self.geometry())
+        self.settings.beginGroup("Data2")
+        self.settings.setValue("Place", self.geometry())
+        self.settings.endGroup()
+        self.settings.beginGroup("Time")
+        self.settings.setValue("Shutdown", self.line_edit.text())
         self.settings.endGroup()

@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-import os
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-from dotenv import load_dotenv
-from bin.launcher import shutdownComputer
 
-load_dotenv()
+from bin.launcher import *
 
 
 class UiShutdownDialog:
-    def setupUi(self, window):
+    def setupUi(self, window, time: int):
+        window.setWindowIcon(QtGui.QIcon(":/favicon/landing-page.ico"))
         window.setObjectName("window")
-        window.resize(320, 240)
+        window.setWindowTitle("Выключить компьютер")
+        window.setFixedSize(320, 240)
         window.verticalLayout = QtWidgets.QVBoxLayout(window)
         window.verticalLayout.setObjectName("verticalLayout")
         window.widget = QtWidgets.QWidget(window)
@@ -44,7 +42,7 @@ class UiShutdownDialog:
         window.logo.setPixmap(QtGui.QPixmap(":/images/FastLauncherLogo.png"))
         window.verticalLayout.addWidget(window.widget)
 
-        window.buttonBox.accepted.connect(shutdownComputer)  # type: ignore
+        window.buttonBox.accepted.connect(lambda: shutdownComputer(time))  # type: ignore
         window.buttonBox.rejected.connect(window.close)  # type: ignore
 
         window.textBrowser.setHtml("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
@@ -58,7 +56,7 @@ class UiShutdownDialog:
                                    "margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
                                    "font-family:\'Rubik\'; font-size:12pt; font-weight:600; "
                                    "color:#ffffff;\">Вы действительно хотите выключить свой компьютер?<br "
-                                   f"/><br /><br />Выключение произойдёт через: {os.getenv('TIME')}"
-                                   "сек.</span></p></body></html>")
+                                   f"/><br /><br />Выключение произойдёт через: {time}"
+                                   " секунд.</span></p></body></html>")
 
         QtCore.QMetaObject.connectSlotsByName(window)

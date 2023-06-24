@@ -1,20 +1,28 @@
-import subprocess
-import os
 from pathlib import Path
-from dotenv import load_dotenv
+from subprocess import call
 
-load_dotenv()
+from winapps import search_installed
+
 BASE_DIR = Path(__file__).cwd().parent
 
 
-def shutdownComputer(time: int = int(os.getenv("TIME"))) -> None:
-    subprocess.call(f"shutdown -s -t {time}")
+def shutdownComputer(time: int) -> None:
+    call(f"shutdown -s -t {abs(int(time))}")
 
 
 def shutdownComputerOff() -> None:
-    subprocess.call("shutdown -a")
+    call("shutdown -a")
 
 
-if __name__ == '__main__':
-    # shutdownComputer()  # success
-    pass
+def openBind(name: str) -> dict:
+    try:
+        [npp] = search_installed(name.lower())
+        if name.lower() == 'war thunder':
+            call(str(npp.uninstall_string).replace('uninstall', 'run'))
+        else:
+            try:
+                call(npp.install_location)
+            except:
+                return {'error': 'Operation not allowed'}
+    except ValueError:
+        return {"error": "Name bind is invalid"}

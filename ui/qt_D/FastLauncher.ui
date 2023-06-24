@@ -2,26 +2,28 @@
 <ui version="4.0">
  <class>FastLauncher</class>
  <widget class="QWidget" name="FastLauncher">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>947</width>
-    <height>650</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">QScrollBar:vertical {
-	margin: 9px 0 15px 0;
-    width: 4px;
- }
+     <property name="geometry">
+         <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>947</width>
+             <height>650</height>
+         </rect>
+     </property>
+     <property name="windowIcon">
+         <iconset resource="../../static/qrc/res.qrc">
+             <normaloff>:/favicon/landing-page.ico</normaloff>:/favicon/landing-page.ico
+         </iconset>
+     </property>
+     <property name="styleSheet">
+         <string notr="true">QScrollBar:vertical {
+             margin: 9px 0 15px 0;
+             width: 4px;
+             }
 
-/*  HANDLE BAR VERTICAL */
-QScrollBar::handle:vertical {	
-	background-color: rgb(80, 80, 122);
+             /* HANDLE BAR VERTICAL */
+             QScrollBar::handle:vertical {
+             background-color: rgb(80, 80, 122);
 	min-height: 30px;
 	border-radius: 2px;
 }
@@ -113,7 +115,7 @@ border:none;</string>
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap resource="../static/res.qrc">:/images/FastLauncherLogo.png</pixmap>
+                     <pixmap resource="../../static/qrc/res.qrc">:/images/FastLauncherLogo.png</pixmap>
                  </property>
                 </widget>
                </item>
@@ -151,8 +153,9 @@ font-weight: bold;
                      <string>Новости</string>
                     </property>
                     <property name="icon">
-                     <iconset resource="../static/res.qrc">
-                      <normaloff>:/icons_buttons/icons8-news.svg</normaloff>:/icons_buttons/icons8-news.svg</iconset>
+                        <iconset resource="../../static/qrc/res.qrc">
+                            <normaloff>:/icons_buttons/icons8-news.svg</normaloff>:/icons_buttons/icons8-news.svg
+                        </iconset>
                     </property>
                     <property name="shortcut">
                      <string>Ctrl+N</string>
@@ -182,8 +185,10 @@ QPushButton:pressed{
                      <string>Настройки</string>
                     </property>
                     <property name="icon">
-                     <iconset resource="../static/res.qrc">
-                      <normaloff>:/icons_buttons/icons8-настройки.svg</normaloff>:/icons_buttons/icons8-настройки.svg</iconset>
+                        <iconset resource="../../static/qrc/res.qrc">
+                            <normaloff>:/icons_buttons/icons8-настройки.svg</normaloff>
+                            :/icons_buttons/icons8-настройки.svg
+                        </iconset>
                     </property>
                     <property name="shortcut">
                      <string>Ctrl+S</string>
@@ -209,8 +214,9 @@ font-weight: bold;
                      <string>Discord</string>
                     </property>
                     <property name="icon">
-                     <iconset resource="../static/res.qrc">
-                      <normaloff>:/icons_buttons/icons8-discord.svg</normaloff>:/icons_buttons/icons8-discord.svg</iconset>
+                        <iconset resource="../../static/qrc/res.qrc">
+                            <normaloff>:/icons_buttons/icons8-discord.svg</normaloff>:/icons_buttons/icons8-discord.svg
+                        </iconset>
                     </property>
                     <property name="shortcut">
                      <string>Ctrl+D</string>
@@ -236,8 +242,10 @@ font-weight: bold;
                      <string>Shutdown</string>
                     </property>
                     <property name="icon">
-                     <iconset resource="../static/res.qrc">
-                      <normaloff>:/icons_buttons/icons8-выключение-системы-50 (1).png</normaloff>:/icons_buttons/icons8-выключение-системы-50 (1).png</iconset>
+                        <iconset resource="../../static/qrc/res.qrc">
+                            <normaloff>:/icons_buttons/icons8-выключение-системы-50 (1).png</normaloff>
+                            :/icons_buttons/icons8-выключение-системы-50 (1).png
+                        </iconset>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -336,26 +344,7 @@ border: none;</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="../static/res.qrc">:/icons/icons8-ps-controller-50.png</pixmap>
-             </property>
-            </widget>
-            <widget class="QLabel" name="img_game">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>-31</y>
-               <width>631</width>
-               <height>511</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: none;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../static/res.qrc">:/images/GTA-5-PNG-Image.png</pixmap>
+                 <pixmap resource="../../static/qrc/res.qrc">:/icons/icons8-ps-controller-50.png</pixmap>
              </property>
             </widget>
             <widget class="QWidget" name="widget" native="true">
@@ -408,18 +397,20 @@ font-weight: bold;
                <string>На главную страницу</string>
               </property>
               <property name="icon">
-               <iconset resource="../static/res.qrc">
-                <normaloff>:/icons_buttons/icons8-стрелка-влево-в-круге-50.png</normaloff>:/icons_buttons/icons8-стрелка-влево-в-круге-50.png</iconset>
+                  <iconset resource="../../static/qrc/res.qrc">
+                      <normaloff>:/icons_buttons/icons8-стрелка-влево-в-круге-50.png</normaloff>
+                      :/icons_buttons/icons8-стрелка-влево-в-круге-50.png
+                  </iconset>
               </property>
              </widget>
              <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>50</y>
-                <width>633</width>
-                <height>181</height>
-               </rect>
+                  <rect>
+                      <x>20</x>
+                      <y>50</y>
+                      <width>1169</width>
+                      <height>371</height>
+                  </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
@@ -499,18 +490,39 @@ font-weight: bold;
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: #2e2f31;
-</string>
+                     <string notr="true">background-color: #2e2f31;
+                     </string>
                  </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
+                    <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                    </property>
                 </widget>
                </item>
               </layout>
              </widget>
+                <widget class="QLabel" name="img_game">
+                    <property name="geometry">
+                        <rect>
+                            <x>80</x>
+                            <y>-30</y>
+                            <width>571</width>
+                            <height>431</height>
+                        </rect>
+                    </property>
+                    <property name="styleSheet">
+                        <string notr="true">background-color: none;</string>
+                    </property>
+                    <property name="text">
+                        <string/>
+                    </property>
+                    <property name="pixmap">
+                        <pixmap resource="../../static/qrc/res.qrc">:/images/logo-warthunder-new.svg</pixmap>
+                    </property>
+                </widget>
+                <zorder>img_game</zorder>
+                <zorder>pushButton</zorder>
+                <zorder>layoutWidget</zorder>
             </widget>
-            <zorder>img_game</zorder>
             <zorder>lbl_count</zorder>
             <zorder>img_play</zorder>
             <zorder>btn_play</zorder>
@@ -555,8 +567,9 @@ QPushButton:hover{
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../static/res.qrc">
-             <normaloff>:/icons/close_white_24dp.svg</normaloff>:/icons/close_white_24dp.svg</iconset>
+               <iconset resource="../../static/qrc/res.qrc">
+                   <normaloff>:/icons/close_white_24dp.svg</normaloff>:/icons/close_white_24dp.svg
+               </iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -590,8 +603,9 @@ QPushButton:hover{
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../static/res.qrc">
-             <normaloff>:/icons/remove_white_24dp.svg</normaloff>:/icons/remove_white_24dp.svg</iconset>
+               <iconset resource="../../static/qrc/res.qrc">
+                   <normaloff>:/icons/remove_white_24dp.svg</normaloff>:/icons/remove_white_24dp.svg
+               </iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -603,9 +617,9 @@ QPushButton:hover{
           <widget class="QListWidget" name="game_list">
            <property name="geometry">
             <rect>
-             <x>-12</x>
+                <x>-3</x>
              <y>98</y>
-             <width>260</width>
+                <width>251</width>
              <height>541</height>
             </rect>
            </property>
@@ -618,17 +632,21 @@ QPushButton:hover{
            <property name="styleSheet">
             <string notr="true">QListWidget{
 border: none;
-}
+                }
 
-QListWidget::item{
-background-color: #16171a;
-color: white;
-height: 75px;
-}
+                QListWidget::item{
+                background-color: #16171a;
+                color: white;
+                height: 75px;
+                }
 
-QListWidget::item:hover{
-background-color: #1f2124;
-}</string>
+                QListWidget::item:hover{
+                background-color: #1f2124;
+                }
+
+                QListWidget::item:selected{
+                border: 2px solid rgb(255,255,255);
+                }</string>
            </property>
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
@@ -659,36 +677,76 @@ background-color: #1f2124;
             </property>
             <property name="foreground">
              <brush brushstyle="NoBrush">
-              <color alpha="255">
-               <red>255</red>
-               <green>255</green>
-               <blue>255</blue>
-              </color>
+                 <color alpha="255">
+                     <red>255</red>
+                     <green>255</green>
+                     <blue>255</blue>
+                 </color>
              </brush>
             </property>
            </item>
-           <item>
-            <property name="text">
-             <string>2</string>
-            </property>
-            <property name="font">
-             <font>
-              <family>Rubik</family>
-              <pointsize>12</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="foreground">
-             <brush brushstyle="NoBrush">
-              <color alpha="255">
-               <red>255</red>
-               <green>255</green>
-               <blue>255</blue>
-              </color>
-             </brush>
-            </property>
-           </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>New Item</string>
+                  </property>
+              </item>
+              <item>
+                  <property name="text">
+                      <string>2</string>
+                  </property>
+                  <property name="font">
+                      <font>
+                          <family>Rubik</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                      </font>
+                  </property>
+                  <property name="foreground">
+                      <brush brushstyle="NoBrush">
+                          <color alpha="255">
+                              <red>255</red>
+                              <green>255</green>
+                              <blue>255</blue>
+                          </color>
+                      </brush>
+                  </property>
+              </item>
            <item>
             <property name="text">
              <string>3</string>
@@ -717,7 +775,7 @@ background-color: #1f2124;
             <rect>
              <x>-7</x>
              <y>32</y>
-             <width>170</width>
+                <width>191</width>
              <height>41</height>
             </rect>
            </property>
@@ -732,7 +790,7 @@ border-radius: 6px;
 </string>
            </property>
            <property name="text">
-            <string>Список игр</string>
+               <string>Список биндов</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -769,7 +827,7 @@ font-weight: bold;</string>
   </layout>
  </widget>
  <resources>
-  <include location="../static/res.qrc"/>
+     <include location="../../static/qrc/res.qrc"/>
  </resources>
  <connections/>
 </ui>
