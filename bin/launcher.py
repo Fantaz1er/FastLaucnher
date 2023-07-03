@@ -16,13 +16,20 @@ def shutdownComputerOff() -> None:
 
 def openBind(name: str) -> dict:
     try:
-        [npp] = search_installed(name.lower())
-        if name.lower() == 'war thunder':
-            call(str(npp.uninstall_string).replace('uninstall', 'run'))
-        else:
-            try:
-                call(npp.install_location)
-            except:
-                return {'error': 'Operation not allowed'}
+        [npp] = search_installed(name.lower().strip())
+        if npp:
+            if "steam" in npp.uninstall_string:
+                call(str(npp.uninstall_string).replace('uninstall', 'run'))
+            else:
+                print(npp.uninstall_string)
     except ValueError:
         return {"error": "Name bind is invalid"}
+
+
+def findBindOnRequest(name: str) -> dict:
+    try:
+        [npp] = search_installed(name.lower().strip())
+    except ValueError:
+        return {'error': 'not found the game'}
+    else:
+        return {"name": npp.name, "modify_path": npp.modify_path}

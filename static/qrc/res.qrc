@@ -20,4 +20,8 @@
         <file>icons8-выключение-системы-50 (1).png</file>
         <file>icons8-discord.svg</file>
     </qresource>
+    <qresource prefix="fonts">
+        <file>Rubik-Bold.ttf</file>
+        <file>Rubik-Regular.ttf</file>
+    </qresource>
 </RCC>
