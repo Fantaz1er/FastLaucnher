@@ -24,9 +24,9 @@
              /* HANDLE BAR VERTICAL */
              QScrollBar::handle:vertical {
              background-color: rgb(80, 80, 122);
-	min-height: 30px;
-	border-radius: 2px;
-}
+             min-height: 30px;
+             border-radius: 2px;
+             }
 
 QScrollBar::handle:vertical:hover{	
 	background-color: rgb(255, 0, 127);
@@ -152,11 +152,11 @@ font-weight: bold;
                     <property name="text">
                      <string>Новости</string>
                     </property>
-                    <property name="icon">
-                        <iconset resource="../../static/qrc/res.qrc">
-                            <normaloff>:/icons_buttons/icons8-news.svg</normaloff>:/icons_buttons/icons8-news.svg
-                        </iconset>
-                    </property>
+                       <property name="icon">
+                           <iconset resource="../../static/qrc/res.qrc">
+                               <normaloff>:/icons_buttons/icons8-news.svg</normaloff>:/icons_buttons/icons8-news.svg
+                           </iconset>
+                       </property>
                     <property name="shortcut">
                      <string>Ctrl+N</string>
                     </property>
@@ -184,12 +184,12 @@ QPushButton:pressed{
                     <property name="text">
                      <string>Настройки</string>
                     </property>
-                    <property name="icon">
-                        <iconset resource="../../static/qrc/res.qrc">
-                            <normaloff>:/icons_buttons/icons8-настройки.svg</normaloff>
-                            :/icons_buttons/icons8-настройки.svg
-                        </iconset>
-                    </property>
+                       <property name="icon">
+                           <iconset resource="../../static/qrc/res.qrc">
+                               <normaloff>:/icons_buttons/icons8-настройки.svg</normaloff>
+                               :/icons_buttons/icons8-настройки.svg
+                           </iconset>
+                       </property>
                     <property name="shortcut">
                      <string>Ctrl+S</string>
                     </property>
@@ -213,11 +213,12 @@ font-weight: bold;
                     <property name="text">
                      <string>Discord</string>
                     </property>
-                    <property name="icon">
-                        <iconset resource="../../static/qrc/res.qrc">
-                            <normaloff>:/icons_buttons/icons8-discord.svg</normaloff>:/icons_buttons/icons8-discord.svg
-                        </iconset>
-                    </property>
+                       <property name="icon">
+                           <iconset resource="../../static/qrc/res.qrc">
+                               <normaloff>:/icons_buttons/icons8-discord.svg</normaloff>
+                               :/icons_buttons/icons8-discord.svg
+                           </iconset>
+                       </property>
                     <property name="shortcut">
                      <string>Ctrl+D</string>
                     </property>
@@ -241,12 +242,12 @@ font-weight: bold;
                     <property name="text">
                      <string>Shutdown</string>
                     </property>
-                    <property name="icon">
-                        <iconset resource="../../static/qrc/res.qrc">
-                            <normaloff>:/icons_buttons/icons8-выключение-системы-50 (1).png</normaloff>
-                            :/icons_buttons/icons8-выключение-системы-50 (1).png
-                        </iconset>
-                    </property>
+                       <property name="icon">
+                           <iconset resource="../../static/qrc/res.qrc">
+                               <normaloff>:/icons_buttons/icons8-выключение-системы-50 (1).png</normaloff>
+                               :/icons_buttons/icons8-выключение-системы-50 (1).png
+                           </iconset>
+                       </property>
                     <property name="iconSize">
                      <size>
                       <width>16</width>
@@ -396,45 +397,68 @@ font-weight: bold;
               <property name="text">
                <string>На главную страницу</string>
               </property>
-              <property name="icon">
-                  <iconset resource="../../static/qrc/res.qrc">
-                      <normaloff>:/icons_buttons/icons8-стрелка-влево-в-круге-50.png</normaloff>
-                      :/icons_buttons/icons8-стрелка-влево-в-круге-50.png
-                  </iconset>
-              </property>
+                 <property name="icon">
+                     <iconset resource="../../static/qrc/res.qrc">
+                         <normaloff>:/icons_buttons/icons8-стрелка-влево-в-круге-50.png</normaloff>
+                         :/icons_buttons/icons8-стрелка-влево-в-круге-50.png
+                     </iconset>
+                 </property>
              </widget>
              <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-                  <rect>
-                      <x>20</x>
-                      <y>50</y>
-                      <width>1169</width>
-                      <height>371</height>
-                  </rect>
-              </property>
+                 <property name="geometry">
+                     <rect>
+                         <x>20</x>
+                         <y>50</y>
+                         <width>1169</width>
+                         <height>371</height>
+                     </rect>
+                 </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_6">
-                 <property name="spacing">
-                  <number>138</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label">
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="text">
-                    <string>Сворачивать лаунчер после запуска бинда</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QCheckBox" name="checkBox">
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="text">
-                    <string/>
+                    <property name="spacing">
+                        <number>138</number>
+                    </property>
+                    <item>
+                        <widget class="QLabel" name="label">
+                            <property name="styleSheet">
+                                <string notr="true"/>
+                            </property>
+                            <property name="text">
+                                <string>Сворачивать лаунчер после запуска бинда</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QCheckBox" name="checkBox_3">
+                            <property name="minimumSize">
+                                <size>
+                                    <width>0</width>
+                                    <height>75</height>
+                                </size>
+                            </property>
+                            <property name="styleSheet">
+                                <string notr="true">QCheckBox::indicator:unchecked{
+                                    image: url(:/icons/icons8-отмеченный-чекбокс-2.svg);
+                                    }
+
+                                    QCheckBox::indicator:checked{
+                                    image: url(:/icons/icons8-галочка.svg);
+                                    }
+                                </string>
+                            </property>
+                            <property name="text">
+                                <string/>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QCheckBox" name="checkBox">
+                            <property name="styleSheet">
+                                <string notr="true"/>
+                            </property>
+                            <property name="text">
+                                <string/>
                    </property>
                   </widget>
                  </item>
@@ -460,39 +484,73 @@ font-weight: bold;
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_5">
                  <property name="spacing">
-                  <number>108</number>
+                     <number>108</number>
                  </property>
-                 <item>
-                  <widget class="QLabel" name="label_2">
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="text">
-                    <string>Запускать лаунчер после запуска компьютера</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QCheckBox" name="checkBox_2">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
+                    <item>
+                        <widget class="QLabel" name="label_2">
+                            <property name="styleSheet">
+                                <string notr="true"/>
+                            </property>
+                            <property name="text">
+                                <string>Запускать лаунчер после запуска компьютера</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QCheckBox" name="checkBox_4">
+                            <property name="minimumSize">
+                                <size>
+                                    <width>0</width>
+                                    <height>75</height>
+                                </size>
+                            </property>
+                            <property name="styleSheet">
+                                <string notr="true">QCheckBox{
+                                    spacing: 15px;
+                                    font-size: 25px;
+                                    color: #4169e1;
+                                    }
+
+                                    QCheckBox::indicator{
+                                    width: 25px;
+                                    height: 25px;
+                                    }
+
+                                    QCheckBox::indicator:unchecked{
+                                    image: url(:/icons/icons8-отмеченный-чекбокс-2.svg);
+                                    }
+
+                                    QCheckBox::indicator:checked{
+                                    image: url(:/icons/icons8-галочка.svg);
+                                    }
+                                </string>
+                            </property>
+                            <property name="text">
+                                <string/>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QCheckBox" name="checkBox_2">
+                            <property name="text">
+                                <string/>
+                            </property>
+                        </widget>
+                    </item>
                 </layout>
                </item>
                <item>
                 <widget class="Line" name="line_2">
-                 <property name="maximumSize">
-                  <size>
-                   <width>600</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                     <string notr="true">background-color: #2e2f31;
-                     </string>
-                 </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>600</width>
+                            <height>16777215</height>
+                        </size>
+                    </property>
+                    <property name="styleSheet">
+                        <string notr="true">background-color: #2e2f31;
+                        </string>
+                    </property>
                     <property name="orientation">
                         <enum>Qt::Horizontal</enum>
                     </property>
@@ -566,11 +624,11 @@ QPushButton:hover{
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-               <iconset resource="../../static/qrc/res.qrc">
-                   <normaloff>:/icons/close_white_24dp.svg</normaloff>:/icons/close_white_24dp.svg
-               </iconset>
-           </property>
+              <property name="icon">
+                  <iconset resource="../../static/qrc/res.qrc">
+                      <normaloff>:/icons/close_white_24dp.svg</normaloff>:/icons/close_white_24dp.svg
+                  </iconset>
+              </property>
            <property name="iconSize">
             <size>
              <width>24</width>
@@ -602,11 +660,11 @@ QPushButton:hover{
            <property name="text">
             <string/>
            </property>
-           <property name="icon">
-               <iconset resource="../../static/qrc/res.qrc">
-                   <normaloff>:/icons/remove_white_24dp.svg</normaloff>:/icons/remove_white_24dp.svg
-               </iconset>
-           </property>
+              <property name="icon">
+                  <iconset resource="../../static/qrc/res.qrc">
+                      <normaloff>:/icons/remove_white_24dp.svg</normaloff>:/icons/remove_white_24dp.svg
+                  </iconset>
+              </property>
            <property name="iconSize">
             <size>
              <width>24</width>
@@ -675,15 +733,15 @@ border: none;
               </color>
              </brush>
             </property>
-            <property name="foreground">
-             <brush brushstyle="NoBrush">
-                 <color alpha="255">
-                     <red>255</red>
-                     <green>255</green>
-                     <blue>255</blue>
-                 </color>
-             </brush>
-            </property>
+               <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                       <color alpha="255">
+                           <red>255</red>
+                           <green>255</green>
+                           <blue>255</blue>
+                       </color>
+                   </brush>
+               </property>
            </item>
               <item>
                   <property name="text">
@@ -747,16 +805,16 @@ border: none;
                       </brush>
                   </property>
               </item>
-           <item>
-            <property name="text">
-             <string>3</string>
-            </property>
-            <property name="font">
-             <font>
-              <family>Rubik</family>
-              <pointsize>12</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
+              <item>
+                  <property name="text">
+                      <string>3</string>
+                  </property>
+                  <property name="font">
+                      <font>
+                          <family>Rubik</family>
+                          <pointsize>12</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
              </font>
             </property>
             <property name="background">
@@ -790,7 +848,7 @@ border-radius: 6px;
 </string>
            </property>
            <property name="text">
-               <string>Список биндов</string>
+               <string>Найти...</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -814,7 +872,7 @@ font-size: 6pt;
 font-weight: bold;</string>
         </property>
         <property name="text">
-         <string>v0.0.1</string>
+            <string>v0.0.5</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>

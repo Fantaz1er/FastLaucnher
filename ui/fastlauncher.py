@@ -9,7 +9,7 @@ from bin import launcher
 from bin import win
 # from bin.googledownloader import google_img_downloader
 from ui.dialog import Dialog
-from ui.handlers import WindowMovement, AnimationClicked, PushButton
+from ui.handlers import WindowMovement, PushButton, PushButtonHead, ListWidgetItem
 
 
 class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
@@ -126,61 +126,26 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.tools)
         self.horizontalLayout_2.setSpacing(24)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.btn_news = QtWidgets.QPushButton(self.tools)
+        self.btn_news = PushButtonHead.PushButton(self.tools)
         self.btn_news.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_news.setStyleSheet("QPushButton{\n"
-                                    "font-family: Rubik;\n"
-                                    "color: #898a8c;\n"
-                                    "background-color: none;\n"
-                                    "border: none;\n"
-                                    "font-size: 9pt;\n"
-                                    "font-weight: bold;\n"
-                                    "}")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons_buttons/icons8-news.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_news.setIcon(icon)
         self.btn_news.setObjectName("btn_news")
         self.horizontalLayout_2.addWidget(self.btn_news)
-        self.btn_settings = QtWidgets.QPushButton(self.tools)
-        self.btn_settings.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_settings.setStyleSheet("QPushButton{\n"
-                                        "font-family: Rubik;\n"
-                                        "color: #898a8c;\n"
-                                        "background-color: none;\n"
-                                        "border: none;\n"
-                                        "font-size: 9pt;\n"
-                                        "font-weight: bold;\n"
-                                        "}")
+        self.btn_settings = PushButtonHead.PushButton(self.tools)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons_buttons/icons8-настройки.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_settings.setIcon(icon1)
         self.btn_settings.setObjectName("btn_settings")
         self.horizontalLayout_2.addWidget(self.btn_settings)
-        self.btn_discord = QtWidgets.QPushButton(self.tools)
-        self.btn_discord.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_discord.setStyleSheet("QPushButton{\n"
-                                       "font-family: Rubik;\n"
-                                       "color: #898a8c;\n"
-                                       "background-color: none;\n"
-                                       "border: none;\n"
-                                       "font-size: 9pt;\n"
-                                       "font-weight: bold;\n"
-                                       "}")
+        self.btn_discord = PushButtonHead.PushButton(self.tools)
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/icons_buttons/icons8-discord.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_discord.setIcon(icon2)
         self.btn_discord.setObjectName("btn_discord")
         self.horizontalLayout_2.addWidget(self.btn_discord)
-        self.btn_shutdown = QtWidgets.QPushButton(self.tools)
-        self.btn_shutdown.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btn_shutdown.setStyleSheet("QPushButton{\n"
-                                        "font-family: Rubik;\n"
-                                        "color: #898a8c;\n"
-                                        "background-color: none;\n"
-                                        "border: none;\n"
-                                        "font-size: 9pt;\n"
-                                        "font-weight: bold;\n"
-                                        "}")
+        self.btn_shutdown = PushButtonHead.PushButton(self.tools)
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(":/icons_buttons/icons8-выключение-системы-50 (1).png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
@@ -196,30 +161,16 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
                                 "border-radius: 6px;\n"
                                 "")
         self.body.setObjectName("body")
-        self.btn_play = PushButton.PushButton(self.body)
+        self.btn_play = PushButton.PushButton(
+            QtGui.QColor("#26272a"),
+            QtGui.QColor("#df005b"),
+            parent=self.body,
+        )
         self.btn_play.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_play.setEnabled(False)
         self.btn_play.setGeometry(QtCore.QRect(280, 450, 75, 23))
-        self.btn_play.setStyleSheet("QPushButton {\n"
-                                    "background-color: #26272a;\n"
-                                    "color: gray;\n"
-                                    "font-family: Rubik;\n"
-                                    "font-weight: bold;\n"
-                                    "border-radius: 0px;\n"
-                                    "}\n"
-                                    "\n"
-                                    "QPushButton:hover{\n"
-                                    "background-color: #df005b;\n"
-                                    "color: white;\n"
-                                    "}")
         self.btn_play.setObjectName("btn_play")
         self.btn_play.setCheckable(True)
-
-        self.aniButton = AnimationClicked.AnimationShadowEffect(QtGui.QColor(223, 0, 91), self.btn_play)
-
-        self.btn_play.hover.connect(self.button_hover)
-        self.btn_play.setGraphicsEffect(self.aniButton)
-
         self.lbl_count = QtWidgets.QLabel(self.body)
         self.lbl_count.setGeometry(QtCore.QRect(-70, 279, 191, 70))
         self.lbl_count.setStyleSheet("background-color: #cc0053;\n"
@@ -251,22 +202,10 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
                                   "color: white;\n"
                                   "font-family: Rubik;\n"
                                   "font-size: 14pt;\n"
-                                  "}\n"
-                                  "\n"
-                                  "QPushButton{\n"
-                                  "font-family: Rubik;\n"
-                                  "color: #898a8c;\n"
-                                  "background-color: none;\n"
-                                  "border: none;\n"
-                                  "font-size: 10pt;\n"
-                                  "font-weight: bold;\n"
-                                  "}\n"
-                                  "\n"
-                                  "")
+                                  "}")
         self.widget.setObjectName("widget")
-        self.pushButton = QtWidgets.QPushButton(self.widget)
+        self.pushButton = PushButtonHead.PushButton(self.widget)
         self.pushButton.setGeometry(QtCore.QRect(14, 10, 171, 23))
-        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/icons_buttons/icons8-стрелка-влево-в-круге-50.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
@@ -285,6 +224,15 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.label.setObjectName("label")
         self.horizontalLayout_6.addWidget(self.label)
         self.checkBox = QtWidgets.QCheckBox(self.layoutWidget)
+        self.checkBox.setStyleSheet(
+            """
+            QCheckBox::indicator:unchecked{
+                image: url(:/icons/icons8-отмеченный-чекбокс-2.svg);
+            }
+            QCheckBox::indicator:checked{
+                image: url(:/icons/icons8-галочка.svg);
+            }"""
+        )
         self.checkBox.setObjectName("checkBox")
         self.horizontalLayout_6.addWidget(self.checkBox)
         if self.settings.contains('data/state_1'):
@@ -310,6 +258,15 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_5.addWidget(self.label_2)
         self.checkBox_2 = QtWidgets.QCheckBox(self.layoutWidget)
+        self.checkBox_2.setStyleSheet(
+            """
+            QCheckBox::indicator:unchecked{
+                image: url(:/icons/icons8-отмеченный-чекбокс-2.svg);
+            }
+            QCheckBox::indicator:checked{
+                image: url(:/icons/icons8-галочка.svg);
+            }"""
+        )
         self.checkBox_2.setObjectName("checkBox_2")
         if self.settings.contains('data/state_2'):
             state = self.settings.value('data/state_2')
@@ -367,60 +324,32 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.choice.setMaximumSize(QtCore.QSize(250, 16777215))
         self.choice.setStyleSheet("")
         self.choice.setObjectName("choice")
-        self.btn_close = QtWidgets.QPushButton(self.choice)
-        self.btn_close.setGeometry(QtCore.QRect(210, 0, 30, 30))
-        self.btn_close.setStyleSheet("QPushButton{\n"
-                                     "    color: white;\n"
-                                     "    background-color: #181a1d;\n"
-                                     "    border: none;\n"
-                                     "    border-radius: 15px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "QPushButton:hover{\n"
-                                     "    background-color: #121316;\n"
-                                     "}")
+        self.btn_close = PushButton.PushButton(
+            QtGui.QColor("#181a1d"),
+            QtGui.QColor("#DB3E26"),
+            stylesheet="border-radius: 15px;",
+            parent=self.choice
+        )
+        self.btn_close.setGeometry(QtCore.QRect(215, 0, 30, 30))
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(":/icons/close_white_24dp.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_close.setIcon(icon5)
         self.btn_close.setIconSize(QtCore.QSize(24, 24))
         self.btn_close.setObjectName("btn_close")
-        self.btn_hide = QtWidgets.QPushButton(self.choice)
+        self.btn_hide = PushButton.PushButton(
+            QtGui.QColor("#181a1d"),
+            QtGui.QColor("#121316"),
+            stylesheet="border-radius: 15px;",
+            parent=self.choice
+        )
         self.btn_hide.setGeometry(QtCore.QRect(180, 0, 31, 30))
-        self.btn_hide.setStyleSheet("QPushButton{\n"
-                                    "    color: white;\n"
-                                    "    background-color: #181a1d;\n"
-                                    "    border: none;\n"
-                                    "    border-radius: 15px;\n"
-                                    "}\n"
-                                    "\n"
-                                    "QPushButton:hover{\n"
-                                    "    background-color: #121316;\n"
-                                    "}")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/remove_white_24dp.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_hide.setIcon(icon6)
         self.btn_hide.setIconSize(QtCore.QSize(24, 24))
         self.btn_hide.setObjectName("btn_hide")
-        self.game_list = QtWidgets.QListWidget(self.choice)
+        self.game_list = ListWidgetItem.ListWidget(self.choice)
         self.game_list.setGeometry(QtCore.QRect(-3, 98, 251, 541))
-        self.game_list.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.game_list.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.game_list.verticalScrollBar().setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
-        self.game_list.setSpacing(9)
-        self.game_list.setStyleSheet("QListWidget{\n"
-                                     "border: none;\n"
-                                     "}\n"
-                                     "QListWidget::item{\n"
-                                     "background-color: #16171a;\n"
-                                     "color: white;\n"
-                                     "height: 75px;\n"
-                                     "}\n"
-                                     "QListWidget::item:hover{\n"
-                                     "background-color: #1f2124;\n"
-                                     "}\n"
-                                     "QListWidget::item:selected{\n"
-                                     "border: 2px solid rgb(255,255,255);\n"
-                                     "}")
         self.game_list.setObjectName("game_list")
         item = QtWidgets.QListWidgetItem()
         item.setFont(self.font)
@@ -462,7 +391,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.btn_shutdown.clicked.connect(lambda: self.dialog_window.show())  # type: ignore
         self.btn_news.clicked.connect(lambda: open("https://vk.com/alexanderkochetov"))  # type: ignore
         self.btn_discord.clicked.connect(lambda: open("https://discord.gg/ezVDWXmgx"))  # type: ignore
-        self.game_list.clicked.connect(self.choiceBind)  # type: ignore
+        self.game_list.clicked.connect(lambda: self.btn_play.setEnabled(True))  # type: ignore
         self.btn_play.clicked.connect(lambda: self.open_bind(self.game_list.currentRow()))  # type: ignore
         self.line_edit.textChanged.connect(self.changeValueTime)  # type: ignore
         self.le_list.textChanged.connect(self.findBind)  # type: ignore
@@ -492,7 +421,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         item.setText(_translate("self", "War Thunder"))
         self.game_list.setSortingEnabled(__sortingEnabled)
         self.le_list.setPlaceholderText(_translate("self", "Найти..."))
-        self.lbl_version.setText(_translate("self", "v0.0.4"))
+        self.lbl_version.setText(_translate("self", "v0.0.5"))
 
     def saveBoxState_load(self) -> None:
         self.settings.beginGroup("data")
@@ -528,35 +457,11 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
                                             "}\n")
             self.widget.setVisible(False)
 
-    def choiceBind(self) -> None:
-        self.btn_play.setEnabled(True)
-        name = self.game_list.item(self.game_list.currentRow()).text()
-        if name == 'War Thunder':
-            self.img_game.setGeometry(QtCore.QRect(80, -30, 571, 431))
-            self.img_game.setPixmap(QtGui.QPixmap(":/images/logo-warthunder-new.svg"))
-        elif name == "Grand Theft Auto V":
-            self.img_game.setGeometry(QtCore.QRect(10, -31, 631, 511))
-            self.img_game.setPixmap(QtGui.QPixmap(":/images/GTA-5-PNG-Image.png"))
-        else:
-            self.img_game.hide()
-
     def open_bind(self, open_id: int) -> None:
         if self.hideLauncherOnPlay:
             self.setWindowState(self.windowState() | QtCore.Qt.WindowMinimized)
         th = Thread(target=launcher.openBind, args=(self.game_list.item(open_id).text().strip(),))
         th.start()
-
-    def button_state_func(self, state) -> None:
-        if state:
-            self.aniButton.stop()
-        else:
-            self.aniButton.start()
-
-    def button_hover(self, hover) -> None:
-        if hover == "enterEvent":
-            self.aniButton.start()
-        elif hover == "leaveEvent":
-            self.aniButton.stop()
 
     def changeValueTime(self, x: str) -> None:
         try:
@@ -588,7 +493,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
             item.setText("War Thunder")
             item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             self.game_list.addItem(item)
-        self.lbl_count.setText(str(self.game_list.count()))  # [+]
+        self.lbl_count.setText(str(self.game_list.count()))
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         self.settings.beginGroup("data")

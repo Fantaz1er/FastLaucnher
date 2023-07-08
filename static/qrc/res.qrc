@@ -4,6 +4,8 @@
         <file>icons8-ps-controller-50.png</file>
         <file>remove_white_24dp.svg</file>
         <file>close_white_24dp.svg</file>
+        <file>icons8-отмеченный-чекбокс-2.svg</file>
+        <file>icons8-галочка.svg</file>
     </qresource>
     <qresource prefix="images">
         <file>logo-warthunder-new.svg</file>
