@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
+import re
+import webbrowser
+import shelve
+import os
 from threading import Thread
-from webbrowser import open
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import ui.res_rc  # type: ignore
 from bin import launcher
 from bin import win
-# from bin.googledownloader import google_img_downloader
 from ui.dialog import Dialog
-from ui.handlers import WindowMovement, PushButton, PushButtonHead, ListWidgetItem
+from ui.handlers import WindowMovement, PushButton, PushButtonHead, ListWidget
 
 
 class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
@@ -24,7 +26,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         QtWidgets.QWidget.__init__(self, parent=parent)
 
         self.setFixedSize(950, 650)
-        self.setWindowIcon(QtGui.QIcon(":/favicon/landing-page.ico"))
+        self.setWindowIcon(QtGui.QIcon(":/favicon/favicon.ico"))
 
         self.setWindowFlag(QtCore.Qt.WindowType.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground)
@@ -158,8 +160,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.verticalLayout_2.addWidget(self.header)
         self.body = QtWidgets.QWidget(self.main)
         self.body.setStyleSheet("background-color: rgba(0,0,0, 40);\n"
-                                "border-radius: 6px;\n"
-                                "")
+                                "border-radius: 6px;\n")
         self.body.setObjectName("body")
         self.btn_play = PushButton.PushButton(
             QtGui.QColor("#26272a"),
@@ -185,19 +186,22 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.img_play.setGeometry(QtCore.QRect(5, 295, 51, 41))
         self.img_play.setStyleSheet("background-color: none;\n"
                                     "border: none;")
-        self.img_play.setText("")
         self.img_play.setPixmap(QtGui.QPixmap(":/icons/icons8-ps-controller-50.png"))
         self.img_play.setObjectName("img_play")
         self.img_game = QtWidgets.QLabel(self.body)
         self.img_game.setStyleSheet("background-color: none;")
         self.img_game.setObjectName("img_game")
+        self.img_game.setFont(self.font)
+        self.img_game.setStyleSheet("color: white; font-size: 32pt; background: none; padding: 160px 110px;")
+        self.img_game.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        # self.img_game.setText("САНЯ, ГДЕ МОЯ ЗП?")
         self.widget = QtWidgets.QWidget(self.body)
+        self.widget.setFixedWidth(659)
+        self.widget.setFixedHeight(488)
         self.widget.setVisible(False)
-        self.widget.setGeometry(QtCore.QRect(0, 0, 651, 491))
         self.widget.setStyleSheet("QWidget{\n"
                                   "background-color: #16171a;\n"
                                   "}\n"
-                                  "\n"
                                   "QLabel{\n"
                                   "color: white;\n"
                                   "font-family: Rubik;\n"
@@ -210,7 +214,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         icon4.addPixmap(QtGui.QPixmap(":/icons_buttons/icons8-стрелка-влево-в-круге-50.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
         self.pushButton.setIcon(icon4)
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setObjectName("pushButto")
         self.layoutWidget = QtWidgets.QWidget(self.widget)
         self.layoutWidget.setGeometry(QtCore.QRect(20, 50, 633, 181))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -348,14 +352,17 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.btn_hide.setIcon(icon6)
         self.btn_hide.setIconSize(QtCore.QSize(24, 24))
         self.btn_hide.setObjectName("btn_hide")
-        self.game_list = ListWidgetItem.ListWidget(self.choice)
-        self.game_list.setGeometry(QtCore.QRect(-3, 98, 251, 541))
-        self.game_list.setObjectName("game_list")
-        item = QtWidgets.QListWidgetItem()
-        item.setFont(self.font)
-        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.game_list.addItem(item)
+        self.game_list = ListWidget.ListWidget(self.choice)
+        for e in set(file.split('.')[0] for file in os.listdir(win.createFolder())):
+            item = QtWidgets.QListWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+            item.setFont(self.font)
+            with shelve.open(os.path.join(win.TEMP_DIR, e)) as states:
+                item.setText(states['keyword'])
+            self.game_list.addItem(item)
+        # Search panel
         self.le_list = QtWidgets.QLineEdit(self.choice)
+        self.le_list.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
         self.le_list.setGeometry(QtCore.QRect(-7, 32, 191, 41))
         self.le_list.setStyleSheet("color: white;\n"
                                    "font-family: Rubik;\n"
@@ -367,6 +374,12 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
                                    "")
         self.le_list.setAlignment(QtCore.Qt.AlignCenter)
         self.le_list.setObjectName("le_list")
+        self.btn_add = PushButton.PushButton(
+            QtGui.QColor("#26272a"),
+            QtGui.QColor("#df005b"),
+            parent=self.choice
+        )
+        self.btn_add.setGeometry(QtCore.QRect(-5, 562, 250, 30))
         self.horizontalLayout.addWidget(self.choice)
         self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.lbl_version = QtWidgets.QLabel(self.main)
@@ -389,10 +402,11 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
         self.btn_settings.clicked.connect(self.open_settings_menu)  # type: ignore
         self.pushButton.clicked.connect(self.open_settings_menu)  # type: ignore
         self.btn_shutdown.clicked.connect(lambda: self.dialog_window.show())  # type: ignore
-        self.btn_news.clicked.connect(lambda: open("https://vk.com/alexanderkochetov"))  # type: ignore
-        self.btn_discord.clicked.connect(lambda: open("https://discord.gg/ezVDWXmgx"))  # type: ignore
+        self.btn_news.clicked.connect(lambda: webbrowser.open("https://vk.com/alexanderkochetov"))  # type: ignore
+        self.btn_discord.clicked.connect(lambda: webbrowser.open(""))  # type: ignore
         self.game_list.clicked.connect(lambda: self.btn_play.setEnabled(True))  # type: ignore
         self.btn_play.clicked.connect(lambda: self.open_bind(self.game_list.currentRow()))  # type: ignore
+        self.btn_add.clicked.connect(lambda: self.addItem(self.game_list.currentItem()))  # type: ignore
         self.line_edit.textChanged.connect(self.changeValueTime)  # type: ignore
         self.le_list.textChanged.connect(self.findBind)  # type: ignore
 
@@ -400,28 +414,24 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("self", "FastLauncher"))
-        self.btn_news.setText(_translate("self", "Новости"))
-        self.btn_news.setShortcut(_translate("self", "Ctrl+N"))
-        self.btn_settings.setText(_translate("self", "Настройки"))
-        self.btn_settings.setShortcut(_translate("self", "Ctrl+S"))
-        self.btn_discord.setText(_translate("self", "Discord"))
-        self.btn_discord.setShortcut(_translate("self", "Ctrl+D"))
-        self.btn_shutdown.setText(_translate("self", "Shutdown"))
-        self.btn_shutdown.setShortcut(_translate("self", "Ctrl+Q"))
-        self.btn_play.setText(_translate("self", "LAUNCH"))
-        self.lbl_count.setText(_translate("self", f"{self.game_list.count()}"))
-        self.pushButton.setText(_translate("self", "На главную страницу"))
-        self.label.setText(_translate("self", "Сворачивать лаунчер после запуска бинда"))
-        self.label_2.setText(_translate("self", "Запускать лаунчер после запуска компьютера"))
-        self.label_3.setText(_translate("self", "Время до выключения компьютера"))
-        __sortingEnabled = self.game_list.isSortingEnabled()
-        self.game_list.setSortingEnabled(False)
-        item = self.game_list.item(0)
-        item.setText(_translate("self", "War Thunder"))
-        self.game_list.setSortingEnabled(__sortingEnabled)
-        self.le_list.setPlaceholderText(_translate("self", "Найти..."))
-        self.lbl_version.setText(_translate("self", "v0.0.5"))
+        self.setWindowTitle(_translate("FastLauncher", "FastLauncher"))
+        self.btn_news.setText(_translate("FastLauncher", "Новости"))
+        self.btn_news.setShortcut(_translate("FastLauncher", "Ctrl+N"))
+        self.btn_settings.setText(_translate("FastLauncher", "Настройки"))
+        self.btn_settings.setShortcut(_translate("FastLauncher", "Ctrl+S"))
+        self.btn_discord.setText(_translate("FastLauncher", "Discord"))
+        self.btn_discord.setShortcut(_translate("FastLauncher", "Ctrl+D"))
+        self.btn_shutdown.setText(_translate("FastLauncher", "Shutdown"))
+        self.btn_shutdown.setShortcut(_translate("FastLauncher", "Ctrl+Q"))
+        self.btn_play.setText(_translate("FastLauncher", "LAUNCH"))
+        self.btn_add.setText(_translate("FastLauncher", "Добавить"))
+        self.lbl_count.setText(_translate("FastLauncher", f"{self.game_list.count()}"))
+        self.pushButton.setText(_translate("FastLauncher", "На главную страницу"))
+        self.label.setText(_translate("FastLauncher", "Сворачивать лаунчер после запуска бинда"))
+        self.label_2.setText(_translate("FastLauncher", "Запускать лаунчер после запуска компьютера"))
+        self.label_3.setText(_translate("FastLauncher", "Время до выключения компьютера"))
+        self.le_list.setPlaceholderText(_translate("FastLauncher", "Найти..."))
+        self.lbl_version.setText(_translate("FastLauncher", "v0.0.6"))
 
     def saveBoxState_load(self) -> None:
         self.settings.beginGroup("data")
@@ -438,23 +448,7 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
     def open_settings_menu(self) -> None:
         if not self.widget.isVisible():
             self.widget.setVisible(True)
-            self.btn_settings.setStyleSheet("QPushButton{\n"
-                                            "font-family: Rubik;\n"
-                                            "color: white;\n"
-                                            "background-color: none;\n"
-                                            "border: none;\n"
-                                            "font-size: 9pt;\n"
-                                            "font-weight: bold;\n"
-                                            "}\n")
         else:
-            self.btn_settings.setStyleSheet("QPushButton{\n"
-                                            "font-family: Rubik;\n"
-                                            "color: #898a8c;\n"
-                                            "background-color: none;\n"
-                                            "border: none;\n"
-                                            "font-size: 9pt;\n"
-                                            "font-weight: bold;\n"
-                                            "}\n")
             self.widget.setVisible(False)
 
     def open_bind(self, open_id: int) -> None:
@@ -462,6 +456,28 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
             self.setWindowState(self.windowState() | QtCore.Qt.WindowMinimized)
         th = Thread(target=launcher.openBind, args=(self.game_list.item(open_id).text().strip(),))
         th.start()
+
+    def addItem(self, _item: QtWidgets.QListWidgetItem) -> None:
+        try:
+            data = launcher.findBindOnRequest(_item.text())
+            if self.game_list.findItems(data['keyword'], QtCore.Qt.MatchContains):
+                return
+            if data['keyword'] == 'error':
+                return
+        except AttributeError:
+            return
+        else:
+            with shelve.open(os.path.join(win.createFolder(), f"save_{_item.text().upper().split()[1]}")) as states:
+                if not states:
+                    states["keyword"] = data["keyword"]
+                    states["modify_path"] = data["modify_path"]
+            item = QtWidgets.QListWidgetItem()
+            item.setFont(self.font)
+            item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+            item.setText(_item.text())
+            self.game_list.show()
+            self.game_list.takeItem(self.game_list.currentRow())
+            self.game_list.addItem(item)
 
     def changeValueTime(self, x: str) -> None:
         try:
@@ -472,27 +488,24 @@ class UiFastLauncher(QtWidgets.QWidget, WindowMovement.PressEvent):
             self.dialog_window = Dialog(self.TIME)
 
     def findBind(self, x: str) -> None:
+        global item
         if x:
-            bind = launcher.findBindOnRequest(x)
-            item = QtWidgets.QListWidgetItem()
-            if 'error' in bind.keys():
-                self.game_list.clear()
+            try:
+                bind = launcher.findBindOnRequest(x)
+            except re.error:
+                bind = {'keyword': 'error'}
+            if 'error' in bind['keyword']:
+                return
+            if self.game_list.findItems(bind['keyword'], QtCore.Qt.MatchContains):
+                return
             else:
-                if self.game_list.findItems(bind['name'], QtCore.Qt.MatchContains):
-                    return
-                else:
-                    # google_img_downloader(bind['name'])
-                    item.setText(f"{bind['name']}")
-                    item.setFont(self.font)
-                    item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                    self.game_list.insertItem(0, item)
+                item = QtWidgets.QListWidgetItem()
+                item.setText(bind['keyword'])
+                item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                item.setFont(self.font)
+                self.game_list.addItem(item)
         else:
-            self.game_list.clear()
-            item = QtWidgets.QListWidgetItem()
-            item.setFont(self.font)
-            item.setText("War Thunder")
-            item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-            self.game_list.addItem(item)
+            self.game_list.takeItem(self.game_list.indexFromItem(item).row())
         self.lbl_count.setText(str(self.game_list.count()))
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:

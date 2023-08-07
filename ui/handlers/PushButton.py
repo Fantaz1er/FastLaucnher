@@ -1,30 +1,28 @@
-from PyQt5.QtCore import Qt, QVariantAnimation, QAbstractAnimation
+# -*- coding: utf-8 -*-
+from PyQt5.QtCore import Qt, QVariantAnimation, QAbstractAnimation, QEvent
 from PyQt5.QtGui import QCursor, QColor
 from PyQt5.QtWidgets import QPushButton
 
 
 class PushButton(QPushButton):
-    def __init__(self, *a0: QColor, parent=None, **kwargs):
+    def __init__(self, *a0: str, parent=None, **kwargs):
         super().__init__(parent)
         self.stylesheet = kwargs['stylesheet'] if kwargs else ''
+        self.setCursor(QCursor(Qt.PointingHandCursor))
         self._animation = QVariantAnimation(
             startValue=QColor(a0[1]),
             endValue=QColor(a0[0]),
             valueChanged=self._on_value_changed,
             duration=400,
         )
-        self._update_stylesheet(QColor("gray"), a0[0])
-        self.setCursor(QCursor(Qt.PointingHandCursor))
+        self._on_value_changed(self._animation.endValue())
 
-    def _on_value_changed(self, color) -> None:
+    def _on_value_changed(self, color: QColor) -> None:
         foreground = (
             QColor("gray")
             if self._animation.direction() == QAbstractAnimation.Forward
             else QColor("white")
         )
-        self._update_stylesheet(foreground, color)
-
-    def _update_stylesheet(self, foreground: QColor, color: QColor) -> None:
         self.setStyleSheet(
             "QPushButton{"
             f"color: {foreground.name()};"
@@ -38,12 +36,12 @@ class PushButton(QPushButton):
             "}"
         )
 
-    def enterEvent(self, event):
+    def enterEvent(self, a0: QEvent) -> None:
         self._animation.setDirection(QAbstractAnimation.Backward)
         self._animation.start()
-        super().enterEvent(event)
+        super().enterEvent(a0)
 
-    def leaveEvent(self, event):
+    def leaveEvent(self, a0: QEvent) -> None:
         self._animation.setDirection(QAbstractAnimation.Forward)
         self._animation.start()
-        super().leaveEvent(event)
+        super().leaveEvent(a0)

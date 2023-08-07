@@ -1,9 +1,7 @@
-from pathlib import Path
+# -*- coding: utf-8 -*-
 from subprocess import call
 
 from winapps import search_installed
-
-BASE_DIR = Path(__file__).cwd().parent
 
 
 def shutdownComputer(time: int) -> None:
@@ -29,7 +27,14 @@ def openBind(name: str) -> dict:
 def findBindOnRequest(name: str) -> dict:
     try:
         [npp] = search_installed(name.lower().strip())
+        if npp:
+            if "steam" in npp.uninstall_string:
+                modify_path = str(npp.uninstall_string).replace('uninstall', 'run')
+            else:
+                modify_path = str(npp.uninstall_string)
+        else:
+            modify_path = None
     except ValueError:
-        return {'error': 'not found the game'}
+        return {"keyword": "error", "modify_path": "Not found the game/bind/script/app"}
     else:
-        return {"name": npp.name, "modify_path": npp.modify_path}
+        return {"keyword": npp.name, "modify_path": modify_path}

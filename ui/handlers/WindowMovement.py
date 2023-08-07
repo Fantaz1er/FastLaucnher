@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from PyQt5.QtCore import Qt
 
 
@@ -17,4 +18,4 @@ class PressEvent:
         if not self.old_pos:
             return
         delta = event.pos() - self.old_pos
-        self.move(self.pos() + delta)
+        self.move(self.pos() + delta)  # type: ignore
