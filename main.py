@@ -10,6 +10,9 @@ from ui.fastlauncher import UiFastLauncher
 
 def run():
     application = QApplication(sys.argv)
+    application.setApplicationVersion("v0.0.7")
+    application.setApplicationName("FastLauncher")
+    application.setApplicationDisplayName("FastLauncher")
     window = UiFastLauncher()
     QFontDatabase.addApplicationFont(r':fonts\Rubik-Bold.ttf')
     QFontDatabase.addApplicationFont(r':fonts\Rubik-Regular.ttf')

@@ -1,0 +1,6 @@
+FastLauncher.zip
+venv
+bin/FastLauncher.exe
+.env
+.gitignore
+.idea

@@ -15,7 +15,7 @@ def isWindows(func) -> object:
         if sys.platform == 'win32':
             func(*args, **kwargs)
         else:
-            return {"Keyword": "error", "msg": "No working on no windows OS"}
+            return {"keyword": "error", "msg": "No working on no windows OS"}
     return wrapper
 
 

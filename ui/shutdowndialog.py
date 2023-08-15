@@ -6,7 +6,7 @@ from bin.launcher import *
 
 class UiShutdownDialog:
     def setupUi(self, window, time: int):
-        window.setWindowIcon(QtGui.QIcon(":/favicon/landing-page.ico"))
+        window.setWindowIcon(QtGui.QIcon(":/favicon/favicon.ico"))
         window.setObjectName("window")
         window.setWindowTitle("Выключить компьютер")
         window.setFixedSize(320, 240)
